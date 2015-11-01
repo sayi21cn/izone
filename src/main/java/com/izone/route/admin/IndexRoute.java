@@ -1,5 +1,5 @@
 package com.izone.route.admin;
 
-public class Index {
+public class IndexRoute {
 
 }
