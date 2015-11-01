@@ -1,5 +1,5 @@
 package com.izone.func;
 
-public class Func {
+public class Funcs {
 
 }
