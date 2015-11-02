@@ -50,12 +50,12 @@ CREATE TABLE `i_attach` (
 DROP TABLE IF EXISTS `i_comment`;
 
 CREATE TABLE `i_comment` (
-  `comment_id` varchar(16) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `post_id` varchar(16) NOT NULL,
-  `create_tim` int(11) NOT NULL,
   `content` text,
-  `status` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`comment_id`)
+  `status` tinyint(2) NOT NULL,
+  `dateline` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*Data for the table `i_comment` */
@@ -78,10 +78,10 @@ CREATE TABLE `i_home` (
 DROP TABLE IF EXISTS `i_message`;
 
 CREATE TABLE `i_message` (
-  `message_id` varchar(16) NOT NULL COMMENT '消息id',
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '消息id',
   `message` text NOT NULL COMMENT '消息内容',
   `dateline` int(11) NOT NULL COMMENT '消息产生时间',
-  PRIMARY KEY (`message_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='消息表';
 
 /*Data for the table `i_message` */
@@ -95,7 +95,7 @@ CREATE TABLE `i_notice` (
   `notice_type` varchar(20) NOT NULL COMMENT '通知类型，system：系统通知，message：用户留言',
   `from_uid` varchar(16) NOT NULL COMMENT '发送人',
   `to_uid` varchar(16) NOT NULL COMMENT '接收人',
-  `notice_status` tinyint(4) NOT NULL COMMENT '通知状态，0：未读，1：已读',
+  `status` tinyint(2) NOT NULL COMMENT '通知状态，0：未读，1：已读',
   `dateline` int(11) NOT NULL COMMENT '发送时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -197,7 +197,7 @@ DROP TABLE IF EXISTS `i_user_log`;
 
 CREATE TABLE `i_user_log` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `uuid` varchar(16) NOT NULL COMMENT '日志产生人',
+  `uid` varchar(16) NOT NULL COMMENT '日志产生人',
   `action` varchar(50) NOT NULL COMMENT '动作',
   `action_data` text COMMENT '日志数据',
   `dateline` int(11) NOT NULL COMMENT '日志产生时间',
