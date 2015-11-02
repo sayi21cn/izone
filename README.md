@@ -15,8 +15,10 @@
 ```sh
 $ git clone https://github.com/junicorn/izone.git
 $ cd izone
-$ jetty:run
+$ mvn jetty:run
 ```
+
+访问 [http://localhost:9000](http://localhost:9000) 即可 :)
 
 
 
