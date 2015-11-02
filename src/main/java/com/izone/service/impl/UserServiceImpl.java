@@ -23,7 +23,7 @@ import com.izone.kit.SecretKit;
 import com.izone.model.ActiveCode;
 import com.izone.model.User;
 import com.izone.service.ActiveCodeService;
-import com.izone.service.UserServiceTest;
+import com.izone.service.UserService;
 
 import blade.kit.DateKit;
 import blade.kit.MailKit;
@@ -33,7 +33,7 @@ import blade.plugin.sql2o.Page;
 import blade.plugin.sql2o.WhereParam;
 
 @Component
-public class UserServiceImpl implements UserServiceTest {
+public class UserServiceImpl implements UserService {
 	
 	private Model<User> model = new Model<User>(User.class);
 	
