@@ -27,6 +27,7 @@ import com.blade.http.Request;
 import com.blade.http.Response;
 import com.blade.servlet.multipart.FileItem;
 import com.izone.Const;
+import com.izone.Const.ATTACH;
 import com.izone.kit.SecretKit;
 import com.izone.kit.SessionKit;
 import com.izone.model.User;
@@ -77,9 +78,9 @@ public class UploadRoute {
 			
 			String suffix = FileKit.getExtension(filename);
 			
-			String fileHashName = SecretKit.createImgName(filename);
+			String attach_id = SecretKit.createAttachId(filename);
 			
-			String filePath = Const.UPLOAD_DIR + File.separator + user.getUid() + File.separator + fileHashName + "." + suffix;
+			String filePath = Const.UPLOAD_DIR + File.separator + user.getUid() + File.separator + attach_id + "." + suffix;
 			
 			String fileRealPath = Blade.me().webRoot() + File.separator + filePath;
 			
@@ -88,6 +89,9 @@ public class UploadRoute {
 			jsonObject.add("status", 200);
 			jsonObject.add("filename", filename);
 			jsonObject.add("url", request.contextPath() + filePath.replaceAll("\\\\", "/"));
+			
+			attachService.saveAttach(attach_id, user.getUid(), ATTACH.image.toString(), filename, filePath, suffix);
+			
 		} else {
 			jsonObject.add("status", 500);
 			jsonObject.add("msg", "no file upload!");

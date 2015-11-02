@@ -22,8 +22,27 @@ public final class Const {
 	 */
 	public static final String UPLOAD_DIR = "static/upload"; 
 	
+	/**
+	 * 系统信息
+	 */
 	public static Map<String, Object> SYSINFO = new HashMap<String, Object>();
 	
+	/**
+	 * 模板全局上下文
+	 */
 	public static JetGlobalContext CONTEXT;
 	
+	/**
+	 * 文章类型
+	 */
+	public enum POST{
+		text, image, music
+	}
+	
+	/**
+	 * 附件类型
+	 */
+	public enum ATTACH{
+		image
+	}
 }

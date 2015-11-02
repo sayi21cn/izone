@@ -43,7 +43,7 @@ public class SecretKit {
 		return null;
 	}
 	
-	public static String createImgName(String key){
+	public static String createAttachId(String key){
 		HashidKit hashidKit = new HashidKit(key, 12);
 		return hashidKit.encode( System.currentTimeMillis() );
 	}
