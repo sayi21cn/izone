@@ -23,8 +23,17 @@ import java.util.Map;
 import blade.kit.PatternKit;
 import blade.kit.PropertyKit;
 
+/**
+ * 
+ * <p>
+ * 表单验证器
+ * </p>
+ *
+ * @author	<a href="mailto:biezhi.me@gmail.com" target="_blank">biezhi</a>
+ * @since	1.0
+ */
 public class Validator {
-
+	
 	private Object object;
 	
 	private String keyName;
