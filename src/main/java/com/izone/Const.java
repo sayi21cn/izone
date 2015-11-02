@@ -12,7 +12,15 @@ import jetbrick.template.JetGlobalContext;
  */
 public final class Const {
 
+	/**
+	 * 全局登录Session标识
+	 */
 	public static final String LOGIN_SESSION = "login_user";
+	
+	/**
+	 * 文件上传目录
+	 */
+	public static final String UPLOAD_DIR = "static/upload"; 
 	
 	public static Map<String, Object> SYSINFO = new HashMap<String, Object>();
 	

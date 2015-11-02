@@ -43,6 +43,11 @@ public class SecretKit {
 		return null;
 	}
 	
+	public static String createImgName(String key){
+		HashidKit hashidKit = new HashidKit(key, 12);
+		return hashidKit.encode( System.currentTimeMillis() );
+	}
+	
 	public static void main(String[] args) {
 		String login_name = "biezhi";
 		String pass_word = "123456";

@@ -16,15 +16,24 @@
 package com.izone.route.front;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 
+import com.blade.Blade;
 import com.blade.annotation.Inject;
 import com.blade.http.Request;
 import com.blade.http.Response;
 import com.blade.servlet.multipart.FileItem;
+import com.izone.Const;
+import com.izone.kit.SecretKit;
 import com.izone.kit.SessionKit;
 import com.izone.model.User;
 import com.izone.service.AttachService;
 
+import blade.kit.FileKit;
+import blade.kit.IOKit;
 import blade.kit.json.JsonObject;
 
 /**
@@ -56,23 +65,56 @@ public class UploadRoute {
 		if(null == user){
 			jsonObject.add("status", 500);
 			jsonObject.add("msg", "user not signin!");
+			response.json(jsonObject.toString());
 			return;
 		}
-		
 		FileItem[] fileItems = request.files();
 		if(null != fileItems && fileItems.length > 0){
 			
 			FileItem fileItem = fileItems[0];
 			File file = fileItem.getFile();
 			String filename = fileItem.getFileName();
-			String name = fileItem.getName();
-			System.out.println("file = " + file);
-			System.out.println("filename = " + filename);
-			System.out.println("name = " + name);
 			
+			String suffix = FileKit.getExtension(filename);
+			
+			String fileHashName = SecretKit.createImgName(filename);
+			
+			String filePath = Const.UPLOAD_DIR + File.separator + user.getUid() + File.separator + fileHashName + "." + suffix;
+			
+			String fileRealPath = Blade.me().webRoot() + File.separator + filePath;
+			
+			nioTransferCopy(file, fileRealPath);
+			
+			jsonObject.add("status", 200);
+			jsonObject.add("filename", filename);
+			jsonObject.add("url", request.contextPath() + filePath.replaceAll("\\\\", "/"));
 		} else {
 			jsonObject.add("status", 500);
 			jsonObject.add("msg", "no file upload!");
 		}
+		
+		response.json(jsonObject.toString());
 	}
+	
+	private static void nioTransferCopy(File source, String target) {  
+	    FileChannel in = null;  
+	    FileChannel out = null;  
+	    FileInputStream inStream = null;  
+	    FileOutputStream outStream = null;  
+	    try {  
+	        inStream = new FileInputStream(source);  
+	        outStream = new FileOutputStream(new File(target));  
+	        in = inStream.getChannel();  
+	        out = outStream.getChannel();  
+	        in.transferTo(0, in.size(), out);  
+	    } catch (IOException e) {  
+	        e.printStackTrace();  
+	    } finally {  
+	    	IOKit.closeQuietly(inStream);
+	    	IOKit.closeQuietly(in);  
+	    	IOKit.closeQuietly(outStream);  
+	    	IOKit.closeQuietly(out);  
+	    }  
+	}  
+	
 }
