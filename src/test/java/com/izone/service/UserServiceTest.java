@@ -20,46 +20,15 @@ import com.izone.model.User;
 import blade.plugin.sql2o.Page;
 import blade.plugin.sql2o.WhereParam;
 
-public interface UserService {
+public interface UserServiceTest {
 
-	/**
-	 * 查询User
-	 * @param where	查询条件
-	 * @return		返回user对象
-	 */
 	User getUser(WhereParam where);
 	
-	/**
-	 * 用户登录
-	 * @param login_name	用户名
-	 * @param pass_word		密码
-	 * @return				返回登录的user
-	 */
 	User signin(String login_name, String pass_word);
 	
-	/**
-	 * 分页获取user
-	 * @param where		查询条件
-	 * @param page		页码
-	 * @param pageSize	每页条数
-	 * @return			返回分页user对象
-	 */
 	Page<User> getUserPage(WhereParam where, Integer page, Integer pageSize);
 	
-	/**
-	 * 用户邮件激活
-	 * @param code	激活码
-	 * @return		返回是否激活成功
-	 */
 	boolean signinActive(String code);
 	
-	/**
-	 * 用户注册
-	 * @param login_name	用户名
-	 * @param pass_word		密码
-	 * @param sex			性别
-	 * @param email			邮箱
-	 * @return				返回是否注册成功
-	 */
 	boolean signup(String login_name, String pass_word, char sex, String email);
 }

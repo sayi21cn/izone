@@ -15,20 +15,30 @@
  */
 package com.izone.service.impl;
 
-import com.blade.annotation.Component;
-import com.izone.kit.SecretKit;
-import com.izone.model.User;
-import com.izone.service.UserService;
+import org.sql2o.Connection;
 
+import com.blade.annotation.Component;
+import com.blade.annotation.Inject;
+import com.izone.kit.SecretKit;
+import com.izone.model.ActiveCode;
+import com.izone.model.User;
+import com.izone.service.ActiveCodeService;
+import com.izone.service.UserServiceTest;
+
+import blade.kit.DateKit;
+import blade.kit.MailKit;
 import blade.kit.StringKit;
 import blade.plugin.sql2o.Model;
 import blade.plugin.sql2o.Page;
 import blade.plugin.sql2o.WhereParam;
 
 @Component
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserServiceTest {
 	
 	private Model<User> model = new Model<User>(User.class);
+	
+	@Inject
+	private ActiveCodeService activeCodeService; 
 	
 	public User getUser(WhereParam where) {
 		return model.select().where(where).fetchOne();
@@ -61,5 +71,51 @@ public class UserServiceImpl implements UserService {
 		}
 		return false;
 	}
-
+	
+	@Override
+	public boolean signup(String login_name, String pass_word, char sex, final String email) {
+		if(StringKit.isNotBlank(login_name) && StringKit.isNotBlank(pass_word) && StringKit.isNotBlank(email)){
+			
+			String pwd = SecretKit.password(login_name, pass_word); 
+			
+			int count = model.insert()
+			.param("login_name", login_name)
+			.param("pass_word", pwd)
+			.param("sex", sex)
+			.param("status", 0)
+			.param("email", email)
+			.param("group_id", 0)
+			.param("reg_time", DateKit.getCurrentUnixTime())
+			.executeAndCommit();
+			
+			if(count > 0){
+				// 发送邮件
+				MailKit.asynSend(email, "验证你的 Izone 邮箱", "感谢选择 Izone，点击下面链接验证邮箱：<br/> <a>aaaa</a>");
+				
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean signinActive(String code) {
+		if(StringKit.isNotBlank(code)){
+			WhereParam where = WhereParam.me();
+			where.eq("code","code");
+			ActiveCode activeCode = activeCodeService.getActiveCode(where);
+			if(null != activeCode){
+				String email = activeCode.getEmail();
+				Connection connection = model.getSql2o().beginTransaction();
+				connection = model.update().param("status", 1).eq("email", email).execute(connection);
+				Integer count = model.update("update i_activecode").param("status", 1).eq("code", code).executeAndCommit();
+				
+				if(count > 0){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+    
 }

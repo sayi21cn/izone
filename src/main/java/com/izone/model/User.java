@@ -16,8 +16,8 @@ public class User implements Serializable {
 	private char sex;
 	private String email;
 	private String avatar;
-	private byte status;
-	private byte group_id;
+	private Byte status;
+	private Byte group_id;
 	private Integer reg_time;
 	
 	public User() {
@@ -79,19 +79,19 @@ public class User implements Serializable {
 		this.avatar = avatar;
 	}
 
-	public byte getStatus() {
+	public Byte getStatus() {
 		return status;
 	}
 
-	public void setStatus(byte status) {
+	public void setStatus(Byte status) {
 		this.status = status;
 	}
 
-	public byte getGroup_id() {
+	public Byte getGroup_id() {
 		return group_id;
 	}
 
-	public void setGroup_id(byte group_id) {
+	public void setGroup_id(Byte group_id) {
 		this.group_id = group_id;
 	}
 
