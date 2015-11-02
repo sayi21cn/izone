@@ -1,24 +1,37 @@
 /*
-Navicat MySQL Data Transfer
+SQLyog Ultimate v11.11 (64 bit)
+MySQL - 5.5.44 : Database - izone
+*********************************************************************
+*/
 
-Source Server         : 127.0.0.1
-Source Server Version : 50540
-Source Host           : localhost:3306
-Source Database       : izone
+/*!40101 SET NAMES utf8 */;
 
-Target Server Type    : MYSQL
-Target Server Version : 50540
-File Encoding         : 65001
+/*!40101 SET SQL_MODE=''*/;
 
-Date: 2015-11-01 15:18:42
-*/
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`izone` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-SET FOREIGN_KEY_CHECKS=0;
+/*Table structure for table `i_activecode` */
 
--- ----------------------------
--- Table structure for `i_attach`
--- ----------------------------
+DROP TABLE IF EXISTS `i_activecode`;
+
+CREATE TABLE `i_activecode` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `code` varchar(32) NOT NULL COMMENT '激活码',
+  `email` varchar(100) NOT NULL COMMENT '发送给哪个邮箱',
+  `status` tinyint(4) NOT NULL DEFAULT '2' COMMENT '0：未使用，1：已使用',
+  `dateline` int(11) NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `i_activecode` */
+
+/*Table structure for table `i_attach` */
+
 DROP TABLE IF EXISTS `i_attach`;
+
 CREATE TABLE `i_attach` (
   `attach_id` varchar(16) NOT NULL COMMENT '附件主键',
   `uid` varchar(16) NOT NULL COMMENT '附件产生人',
@@ -30,14 +43,12 @@ CREATE TABLE `i_attach` (
   PRIMARY KEY (`attach_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='附件表';
 
--- ----------------------------
--- Records of i_attach
--- ----------------------------
+/*Data for the table `i_attach` */
 
--- ----------------------------
--- Table structure for `i_comment`
--- ----------------------------
+/*Table structure for table `i_comment` */
+
 DROP TABLE IF EXISTS `i_comment`;
+
 CREATE TABLE `i_comment` (
   `comment_id` varchar(16) NOT NULL,
   `post_id` varchar(16) NOT NULL,
@@ -47,14 +58,12 @@ CREATE TABLE `i_comment` (
   PRIMARY KEY (`comment_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of i_comment
--- ----------------------------
+/*Data for the table `i_comment` */
 
--- ----------------------------
--- Table structure for `i_home`
--- ----------------------------
+/*Table structure for table `i_home` */
+
 DROP TABLE IF EXISTS `i_home`;
+
 CREATE TABLE `i_home` (
   `home_id` varchar(50) NOT NULL,
   `title` varchar(255) DEFAULT NULL COMMENT '主页标题',
@@ -62,14 +71,12 @@ CREATE TABLE `i_home` (
   PRIMARY KEY (`home_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of i_home
--- ----------------------------
+/*Data for the table `i_home` */
 
--- ----------------------------
--- Table structure for `i_message`
--- ----------------------------
+/*Table structure for table `i_message` */
+
 DROP TABLE IF EXISTS `i_message`;
+
 CREATE TABLE `i_message` (
   `message_id` varchar(16) NOT NULL COMMENT '消息id',
   `message` text NOT NULL COMMENT '消息内容',
@@ -77,14 +84,12 @@ CREATE TABLE `i_message` (
   PRIMARY KEY (`message_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='消息表';
 
--- ----------------------------
--- Records of i_message
--- ----------------------------
+/*Data for the table `i_message` */
 
--- ----------------------------
--- Table structure for `i_notice`
--- ----------------------------
+/*Table structure for table `i_notice` */
+
 DROP TABLE IF EXISTS `i_notice`;
+
 CREATE TABLE `i_notice` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `notice_type` varchar(20) NOT NULL COMMENT '通知类型，system：系统通知，message：用户留言',
@@ -95,28 +100,24 @@ CREATE TABLE `i_notice` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of i_notice
--- ----------------------------
+/*Data for the table `i_notice` */
 
--- ----------------------------
--- Table structure for `i_options`
--- ----------------------------
+/*Table structure for table `i_options` */
+
 DROP TABLE IF EXISTS `i_options`;
+
 CREATE TABLE `i_options` (
   `opt_name` varchar(50) NOT NULL,
   `opt_value` text,
   PRIMARY KEY (`opt_name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of i_options
--- ----------------------------
+/*Data for the table `i_options` */
 
--- ----------------------------
--- Table structure for `i_post`
--- ----------------------------
+/*Table structure for table `i_post` */
+
 DROP TABLE IF EXISTS `i_post`;
+
 CREATE TABLE `i_post` (
   `post_id` varchar(16) NOT NULL COMMENT '文章id',
   `post_type` varchar(20) NOT NULL COMMENT '文章类型，text：文字，image：图片，music：音乐',
@@ -129,14 +130,12 @@ CREATE TABLE `i_post` (
   PRIMARY KEY (`post_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of i_post
--- ----------------------------
+/*Data for the table `i_post` */
 
--- ----------------------------
--- Table structure for `i_tag`
--- ----------------------------
+/*Table structure for table `i_tag` */
+
 DROP TABLE IF EXISTS `i_tag`;
+
 CREATE TABLE `i_tag` (
   `tag_id` varchar(16) NOT NULL COMMENT '标签id',
   `tag_name` varchar(100) NOT NULL COMMENT '标签名称',
@@ -144,14 +143,12 @@ CREATE TABLE `i_tag` (
   PRIMARY KEY (`tag_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of i_tag
--- ----------------------------
+/*Data for the table `i_tag` */
 
--- ----------------------------
--- Table structure for `i_tag_post`
--- ----------------------------
+/*Table structure for table `i_tag_post` */
+
 DROP TABLE IF EXISTS `i_tag_post`;
+
 CREATE TABLE `i_tag_post` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `tag_id` varchar(16) NOT NULL,
@@ -159,14 +156,12 @@ CREATE TABLE `i_tag_post` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
--- ----------------------------
--- Records of i_tag_post
--- ----------------------------
+/*Data for the table `i_tag_post` */
 
--- ----------------------------
--- Table structure for `i_user`
--- ----------------------------
+/*Table structure for table `i_user` */
+
 DROP TABLE IF EXISTS `i_user`;
+
 CREATE TABLE `i_user` (
   `uid` varchar(16) NOT NULL COMMENT '用户uuid，唯一标识',
   `login_name` varchar(30) NOT NULL COMMENT '用户登录名',
@@ -181,14 +176,12 @@ CREATE TABLE `i_user` (
   PRIMARY KEY (`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户表';
 
--- ----------------------------
--- Records of i_user
--- ----------------------------
+/*Data for the table `i_user` */
 
--- ----------------------------
--- Table structure for `i_user_follow`
--- ----------------------------
+/*Table structure for table `i_user_follow` */
+
 DROP TABLE IF EXISTS `i_user_follow`;
+
 CREATE TABLE `i_user_follow` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `uid` varchar(16) NOT NULL,
@@ -196,14 +189,12 @@ CREATE TABLE `i_user_follow` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='关注表';
 
--- ----------------------------
--- Records of i_user_follow
--- ----------------------------
+/*Data for the table `i_user_follow` */
 
--- ----------------------------
--- Table structure for `i_user_log`
--- ----------------------------
+/*Table structure for table `i_user_log` */
+
 DROP TABLE IF EXISTS `i_user_log`;
+
 CREATE TABLE `i_user_log` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `uuid` varchar(16) NOT NULL COMMENT '日志产生人',
@@ -213,14 +204,12 @@ CREATE TABLE `i_user_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户日志表';
 
--- ----------------------------
--- Records of i_user_log
--- ----------------------------
+/*Data for the table `i_user_log` */
 
--- ----------------------------
--- Table structure for `i_user_post`
--- ----------------------------
+/*Table structure for table `i_user_post` */
+
 DROP TABLE IF EXISTS `i_user_post`;
+
 CREATE TABLE `i_user_post` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `uid` varchar(16) NOT NULL COMMENT '用户id',
@@ -228,14 +217,12 @@ CREATE TABLE `i_user_post` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of i_user_post
--- ----------------------------
+/*Data for the table `i_user_post` */
 
--- ----------------------------
--- Table structure for `i_user_unfollow`
--- ----------------------------
+/*Table structure for table `i_user_unfollow` */
+
 DROP TABLE IF EXISTS `i_user_unfollow`;
+
 CREATE TABLE `i_user_unfollow` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `uid` varchar(16) NOT NULL,
@@ -243,6 +230,8 @@ CREATE TABLE `i_user_unfollow` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='被关注表';
 
--- ----------------------------
--- Records of i_user_unfollow
--- ----------------------------
+/*Data for the table `i_user_unfollow` */
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
