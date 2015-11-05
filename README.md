@@ -10,7 +10,7 @@
 
 # 安装说明
 
-新建数据库 `izone`，字符集为 `UTF-8`，导入 `izone.sql` 到你的数据库。
+新建数据库 `izone`，字符集为 `UTF-8`，导入 [izone.sql](docs/izone.sql) 到你的数据库。
 
 ```sh
 $ git clone https://github.com/junicorn/izone.git
