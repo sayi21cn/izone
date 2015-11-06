@@ -120,6 +120,7 @@ DROP TABLE IF EXISTS `i_post`;
 
 CREATE TABLE `i_post` (
   `post_id` varchar(16) NOT NULL COMMENT '文章id',
+  `uid` varchar(16) NOT NULL COMMENT '用户ID',
   `post_type` varchar(20) NOT NULL COMMENT '文章类型，text：文字，image：图片，music：音乐',
   `title` varchar(50) DEFAULT NULL COMMENT '文章标题',
   `content` text COMMENT '文章内容',
@@ -205,19 +206,6 @@ CREATE TABLE `i_user_log` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户日志表';
 
 /*Data for the table `i_user_log` */
-
-/*Table structure for table `i_user_post` */
-
-DROP TABLE IF EXISTS `i_user_post`;
-
-CREATE TABLE `i_user_post` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `uid` varchar(16) NOT NULL COMMENT '用户id',
-  `post_id` varchar(16) NOT NULL COMMENT '文章id',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-/*Data for the table `i_user_post` */
 
 /*Table structure for table `i_user_unfollow` */
 
