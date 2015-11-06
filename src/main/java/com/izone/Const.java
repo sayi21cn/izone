@@ -3,6 +3,8 @@ package com.izone;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.izone.kit.QiniuKit;
+
 import jetbrick.template.JetGlobalContext;
 
 /**
@@ -31,5 +33,10 @@ public final class Const {
 	 * 模板全局上下文
 	 */
 	public static JetGlobalContext CONTEXT;
+	
+	/**
+	 * 是否使用七牛
+	 */
+	public static final boolean useQiniu = QiniuKit.useQiniu();
 	
 }

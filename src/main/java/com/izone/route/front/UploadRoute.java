@@ -20,6 +20,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import blade.kit.FileKit;
 import blade.kit.IOKit;
@@ -32,6 +35,7 @@ import com.blade.http.Response;
 import com.blade.servlet.multipart.FileItem;
 import com.izone.AttachType;
 import com.izone.Const;
+import com.izone.kit.QiniuKit;
 import com.izone.kit.SecretKit;
 import com.izone.kit.SessionKit;
 import com.izone.model.User;
@@ -92,6 +96,9 @@ public class UploadRoute {
 			
 			attachService.saveAttach(attach_id, user.getUid(), AttachType.image, filename, filePath, suffix);
 			
+			if(Const.useQiniu){
+				syncQiniu(file, filePath);
+			}
 		} else {
 			jsonObject.add("status", 500);
 			jsonObject.add("msg", "no file upload!");
@@ -99,6 +106,29 @@ public class UploadRoute {
 		
 		response.json(jsonObject.toString());
 	}
+	
+	/**
+	 * 异步同步到七牛
+	 * @param file
+	 * @param key
+	 */
+	private void syncQiniu(final File file, final String key){
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				QiniuKit.upload(file, key);
+			}
+		};
+		this.execute(runnable);
+	}
+	
+	private ExecutorService executor;
+    private Future<?> execute(Runnable runnable) {
+        if (this.executor == null) {
+            this.executor = Executors.newCachedThreadPool();
+        }
+        return executor.submit(runnable);
+    }
 	
 	private static void nioTransferCopy(File source, String target) {  
 	    FileChannel in = null;  
