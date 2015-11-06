@@ -15,19 +15,14 @@
  */
 package com.izone.service;
 
-import com.izone.AttachType;
-
-public interface AttachService {
+public interface OptionsService {
 
 	/**
-	 * 保存附件
-	 * @param attach_id		附件ID
-	 * @param uid			用户ID
-	 * @param attach_type	附件类型
-	 * @param attach_name	附件名称，如：hello.png
-	 * @param save_path		保存路径，如：/static/upload/ccjjND_SSVMD2KSQVM/C56A5EECAPVKUR50.png
-	 * @param suffix		附件后缀，如：png
+	 * 保存系统配置数据
+	 * @param opt_name		配置name
+	 * @param opt_value		配置value
 	 * @return				返回是否保存成功
 	 */
-	boolean saveAttach(String attach_id, String uid, AttachType attach_type, String attach_name, String save_path, String suffix);
+	boolean saveOptions(String opt_name, String opt_value);
+	
 }

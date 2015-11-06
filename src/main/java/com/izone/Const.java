@@ -32,17 +32,4 @@ public final class Const {
 	 */
 	public static JetGlobalContext CONTEXT;
 	
-	/**
-	 * 文章类型
-	 */
-	public enum POST{
-		text, image, music
-	}
-	
-	/**
-	 * 附件类型
-	 */
-	public enum ATTACH{
-		image
-	}
 }

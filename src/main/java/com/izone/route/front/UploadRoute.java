@@ -21,21 +21,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
+import blade.kit.FileKit;
+import blade.kit.IOKit;
+import blade.kit.json.JsonObject;
+
 import com.blade.Blade;
 import com.blade.annotation.Inject;
 import com.blade.http.Request;
 import com.blade.http.Response;
 import com.blade.servlet.multipart.FileItem;
+import com.izone.AttachType;
 import com.izone.Const;
-import com.izone.Const.ATTACH;
 import com.izone.kit.SecretKit;
 import com.izone.kit.SessionKit;
 import com.izone.model.User;
 import com.izone.service.AttachService;
-
-import blade.kit.FileKit;
-import blade.kit.IOKit;
-import blade.kit.json.JsonObject;
 
 /**
  * 
@@ -90,7 +90,7 @@ public class UploadRoute {
 			jsonObject.add("filename", filename);
 			jsonObject.add("url", request.contextPath() + filePath.replaceAll("\\\\", "/"));
 			
-			attachService.saveAttach(attach_id, user.getUid(), ATTACH.image.toString(), filename, filePath, suffix);
+			attachService.saveAttach(attach_id, user.getUid(), AttachType.image, filename, filePath, suffix);
 			
 		} else {
 			jsonObject.add("status", 500);

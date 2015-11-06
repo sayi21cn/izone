@@ -16,6 +16,7 @@
 package com.izone.service.impl;
 
 import com.blade.annotation.Component;
+import com.izone.AttachType;
 import com.izone.model.Attach;
 import com.izone.service.AttachService;
 
@@ -29,15 +30,15 @@ public class AttachServiceImpl implements AttachService {
 	private Model<Attach> model = new Model<Attach>(Attach.class);
 	
 	@Override
-	public boolean saveAttach(String attach_id, String uid, String attach_type, String attach_name, String save_path,
+	public boolean saveAttach(String attach_id, String uid, AttachType attach_type, String attach_name, String save_path,
 			String suffix) {
-		if(StringKit.isNotBlank(attach_id) && StringKit.isNotBlank(uid) && StringKit.isNotBlank(attach_type)
+		if(StringKit.isNotBlank(attach_id) && StringKit.isNotBlank(uid) && null != attach_type
 				&& StringKit.isNotBlank(attach_name) && StringKit.isNotBlank(save_path) && StringKit.isNotBlank(suffix)){
 			
 			return model.insert()
 			.param("attach_id", attach_id)
 			.param("uid", uid)
-			.param("attach_type", attach_type)
+			.param("attach_type", attach_type.toString())
 			.param("attach_name", attach_name)
 			.param("save_path", save_path)
 			.param("suffix", suffix)

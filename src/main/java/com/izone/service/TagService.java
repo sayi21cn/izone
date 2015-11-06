@@ -15,19 +15,29 @@
  */
 package com.izone.service;
 
-import com.izone.AttachType;
+import com.izone.model.Tag;
 
-public interface AttachService {
+public interface TagService {
 
 	/**
-	 * 保存附件
-	 * @param attach_id		附件ID
-	 * @param uid			用户ID
-	 * @param attach_type	附件类型
-	 * @param attach_name	附件名称，如：hello.png
-	 * @param save_path		保存路径，如：/static/upload/ccjjND_SSVMD2KSQVM/C56A5EECAPVKUR50.png
-	 * @param suffix		附件后缀，如：png
-	 * @return				返回是否保存成功
+	 * 保存标签
+	 * @param tag_name	标签名称
+	 * @return			返回是否保存成功
 	 */
-	boolean saveAttach(String attach_id, String uid, AttachType attach_type, String attach_name, String save_path, String suffix);
+	boolean saveTag(String tag_name);
+	
+	/**
+	 * 查询标签
+	 * @param tag_name	标签名称
+	 * @return			返回标签对象
+	 */
+	Tag geTag(String tag_name);
+	
+	/**
+	 * 保存文章关联标签
+	 * @param tag_name	标签id
+	 * @param post_id	文章id
+	 * @return
+	 */
+	boolean saveTagPost(String tag_name, String post_id);
 }

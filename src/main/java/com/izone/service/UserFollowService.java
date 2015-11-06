@@ -15,19 +15,31 @@
  */
 package com.izone.service;
 
-import com.izone.AttachType;
-
-public interface AttachService {
+public interface UserFollowService {
 
 	/**
-	 * 保存附件
-	 * @param attach_id		附件ID
-	 * @param uid			用户ID
-	 * @param attach_type	附件类型
-	 * @param attach_name	附件名称，如：hello.png
-	 * @param save_path		保存路径，如：/static/upload/ccjjND_SSVMD2KSQVM/C56A5EECAPVKUR50.png
-	 * @param suffix		附件后缀，如：png
-	 * @return				返回是否保存成功
+	 * 添加关注
+	 * @param uid			我的uid	
+	 * @param follow_uid	粉丝uid
+	 * @return				返回是否关注成功
 	 */
-	boolean saveAttach(String attach_id, String uid, AttachType attach_type, String attach_name, String save_path, String suffix);
+	boolean saveFollow(String uid, String follow_uid);
+	
+	
+	/**
+	 * 取消关注
+	 * @param uid			我的uid
+	 * @param unfollow_uid	我关注的人的uid
+	 * @return				返回是否取消成功
+	 */
+	boolean removeFollow(String uid, String unfollow_uid);
+	
+	/**
+	 * 判断我是否关注follow_uid
+	 * @param uid			我的uid
+	 * @param follow_uid	关注uid
+	 * @return				返回是否关注
+	 */
+	boolean isFollow(String uid, String follow_uid);
+	
 }
