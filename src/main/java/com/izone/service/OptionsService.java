@@ -15,6 +15,9 @@
  */
 package com.izone.service;
 
+import java.util.List;
+import java.util.Map;
+
 public interface OptionsService {
 
 	/**
@@ -25,4 +28,8 @@ public interface OptionsService {
 	 */
 	boolean saveOptions(String opt_name, String opt_value);
 	
+	/**
+	 * @return	读取所有配置
+	 */
+	List<Map<String, Object>> getOptions();
 }
