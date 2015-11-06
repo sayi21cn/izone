@@ -15,17 +15,64 @@
  */
 package com.izone.route;
 
+import com.blade.context.BladeWebContext;
 import com.blade.render.ModelAndView;
+import com.izone.Const;
+import com.izone.model.User;
 
 public class BaseRoute {
-
-	public ModelAndView getFront(String view){
+	
+	/**
+	 * 默认分页条数
+	 */
+	protected Integer pageSize = 10;
+	
+	/**
+	 * 状态字段
+	 */
+	protected String STATUS = "status";
+	
+	/**
+	 * 成功
+	 */
+	protected String SUCCESS = "success";
+	
+	/**
+	 * 服务器异常
+	 */
+	protected String ERROR = "error";
+	
+	/**
+	 * 已经存在
+	 */
+	protected String EXIST = "exist";
+	
+	/**
+	 * 失败
+	 */
+	protected String FAILURE = "failure";
+	
+	
+	protected ModelAndView getFront(String view){
 		return new ModelAndView(view);
 	}
 	
-	public ModelAndView getAdmin(String view){
+	protected ModelAndView getAdmin(String view){
 		view = "admin/" + view;
 		return new ModelAndView(view);
 	}
 	
+	/**
+	 * @return	返回是否登录
+	 */
+	public User isSignin(){
+		return BladeWebContext.session().attribute(Const.LOGIN_SESSION);
+	}
+	
+	/**
+	 * @return	返回是否登录并且是管理员
+	 */
+	public User isAdmin(){
+		return BladeWebContext.session().attribute(Const.LOGIN_SESSION);
+	}
 }
