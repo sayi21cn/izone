@@ -17,6 +17,7 @@ import com.izone.route.BaseRoute;
 public class IndexRoute extends BaseRoute {
 
 	public void home(Request request, Response response) {
+		
 		ModelAndView modelAndView = this.getFront("home");
 		response.render(modelAndView);
 	}
