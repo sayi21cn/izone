@@ -67,6 +67,6 @@ public interface PostService {
 	 * @param pageSize		每页条数
 	 * @return				返回分页对象
 	 */
-	Page<Map<String, Object>> getPostPage(WhereParam whereParam, String orderby, Integer page, Integer pageSize);
+	Page<Post> getPostPage(WhereParam whereParam, String orderby, Integer page, Integer pageSize);
 	
 }
