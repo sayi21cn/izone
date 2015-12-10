@@ -28,7 +28,7 @@ public class App extends Bootstrap {
 	public void init(Blade blade) {
 		
 		// 加载配置文件
-		blade.config("blade.properties");
+		blade.config("blade.conf");
 		
 		// 加载路由文件
 		blade.routeConf("com.izone.route.front", "route-front.conf");
@@ -48,7 +48,7 @@ public class App extends Bootstrap {
 		
 		// 配置数据库
 		try {
-			Properties props = PropertyKit.getProperty("ds.properties");
+			Properties props = PropertyKit.getProperty("ds.conf");
 			DataSource dataSource = DruidDataSourceFactory.createDataSource(props);
 			Sql2oPlugin sql2oPlugin = blade.plugin(Sql2oPlugin.class);
 			sql2oPlugin.config(dataSource).run();

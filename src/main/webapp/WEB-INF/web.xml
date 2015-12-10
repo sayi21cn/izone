@@ -4,18 +4,21 @@
 
 <web-app>
 	<display-name>Archetype Created Web Application</display-name>
-
-	<filter>
-		<filter-name>CoreFilter</filter-name>
-		<filter-class>com.blade.CoreFilter</filter-class>
+		
+	<servlet>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<servlet-class>com.blade.web.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
 		<init-param>
-			<param-name>bootstrapClass</param-name>
+			<param-name>bootstrap</param-name>
 			<param-value>com.izone.App</param-value>
 		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>CoreFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
