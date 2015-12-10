@@ -15,7 +15,7 @@
  */
 package com.izone.kit;
 
-import com.blade.http.Request;
+import com.blade.web.http.Request;
 import com.izone.Const;
 import com.izone.model.User;
 

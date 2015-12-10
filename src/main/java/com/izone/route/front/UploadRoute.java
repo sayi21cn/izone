@@ -30,9 +30,9 @@ import blade.kit.json.JsonObject;
 
 import com.blade.Blade;
 import com.blade.annotation.Inject;
-import com.blade.http.Request;
-import com.blade.http.Response;
-import com.blade.servlet.multipart.FileItem;
+import com.blade.web.http.Request;
+import com.blade.web.http.Response;
+import com.blade.web.multipart.FileItem;
 import com.izone.AttachType;
 import com.izone.Const;
 import com.izone.kit.QiniuKit;

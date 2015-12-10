@@ -1,7 +1,7 @@
 package com.izone.route.admin;
 
-import com.blade.http.Request;
-import com.blade.http.Response;
+import com.blade.web.http.Request;
+import com.blade.web.http.Response;
 
 public class IndexRoute {
 

@@ -4,18 +4,18 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import jetbrick.template.JetEngine;
+import jetbrick.template.JetGlobalContext;
+import jetbrick.template.resolver.GlobalResolver;
+import blade.kit.MailKit;
+import blade.kit.PropertyKit;
+import blade.plugin.sql2o.Sql2oPlugin;
+
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.blade.Blade;
 import com.blade.Bootstrap;
 import com.blade.render.JetbrickRender;
 import com.izone.func.Funcs;
-
-import blade.kit.MailKit;
-import blade.kit.PropertyKit;
-import blade.plugin.sql2o.Sql2oPlugin;
-import jetbrick.template.JetEngine;
-import jetbrick.template.JetGlobalContext;
-import jetbrick.template.resolver.GlobalResolver;
 
 /**
  * 全局初始化配置
@@ -25,8 +25,7 @@ import jetbrick.template.resolver.GlobalResolver;
 public class App extends Bootstrap {
 
 	@Override
-	public void init() {
-		Blade blade = Blade.me();
+	public void init(Blade blade) {
 		
 		// 加载配置文件
 		blade.config("blade.properties");
